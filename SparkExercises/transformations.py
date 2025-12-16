@@ -88,3 +88,9 @@ endpoint = success.map(lambda x: (x.split(' ')[2],1))\
     .reduceByKey(lambda a,b: a+b)\
     .sortBy(lambda x:x[1],ascending=False)
 print(f"{endpoint.collect()}")
+
+success = web_logs.filter(lambda x: '200' in x)\
+    .map(lambda x: (x.split(' ')[2],1))\
+    .reduceByKey(lambda a,b: a+b)\
+    .sortBy(lambda x:x[1],ascending=False)
+print(f"{success.collect()}")
